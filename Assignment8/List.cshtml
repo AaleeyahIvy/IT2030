@@ -1,27 +1,26 @@
 ﻿@model ProductListViewModel
 @{
-    ViewBag.Title = "Product List";
+    ViewBag.Title = "Product Manager";
 }
 
-<h1>Product List</h1>
+<h1>@ViewBag.Title</h1>
 <div class="row">
     <div class="col-sm-2">
-            <a asp-controller="Product" asp-action="List" asp-route-id="All" 
-                class="list-group-item 
-                @(ViewBag.CheckActiveCategory == "All" ? "active" : "")">
-                All
-            </a>
-
+        <ul class="list-group">
+            <a asp-action="List" asp-route-id="All"
+               class="list-group-item
+                @if (Model.SelectedCategory == "All") {
+                    <text>active</text>
+                } ">All</a>
             @foreach (Category c in Model.Categories)
             {
-
-                    <a asp-controller="Product" asp-action="List" asp-route-id="@c.Name" 
-                       class="list-group-item
-                             @(ViewBag.CheckActiveCategory == c.Name ? "active" : "")">
-                        @c.Name
-                    </a>
-
+                <a asp-action="List" asp-route-id="@c.Name"
+                   class="list-group-item
+                         @(ViewBag.CheckActiveCategory == c.Name ? "active" : "")">
+                    @c.Name
+                </a>
             }
+        </ul>
     </div>
 
     <div class="col-sm-10">
@@ -34,23 +33,30 @@
                     <th></th>
             </thead>
             <tbody>
-                @foreach (var product in Model.Products)
+                @foreach (var p in Model.Products)
                 {
                     <tr>
-                        <td>@product.Name</td>
-                        <td>@product.Price.ToString("C")</td>
+                        <td>@p.Name</td>
+                        <td>@p.Price.ToString("C")</td>
                         <td>
-                            <a asp-controller="Product" asp-action="Details"
-                               asp-route-id="@product.ProductID"
-                               asp-route-slug="@product.Slug">View Details</a>
+                            <a asp-action="Update"
+                               asp-route-id="@p.ProductID">Update</a>
                         </td>
                         <td>
-                            <a asp-controller="Cart" asp-action="Add"
-                               asp-route-id="@product.Slug">Add to Cart</a>
+                            <a asp-action="Delete"
+                               asp-route-id="@p.ProductID">Delete</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
+        @{
+            string userMessage = TempData?["UserMessage"]?.ToString() ?? "";
+        }
+        @if (userMessage != "")
+        {
+            <div class="text-success">@userMessage</div>
+        }
+        <a asp-action="Add" class="btn btn-primary">Add New Product</a>
     </div>
 </div>

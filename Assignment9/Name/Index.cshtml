@@ -1,0 +1,8 @@
+﻿@model TeamListViewModel
+@{
+    ViewData["Title"] = "Change User Name";
+}
+<form asp-action="Change" method="post">
+    <input asp-for="@Model.UserName" placeholder="Type name here" class="mb-3"/><br/>
+    <button type="submit" class="btn btn-primary">Change Name</button>
+</form>

@@ -1,0 +1,33 @@
+﻿@model List<Trip>
+@{ 
+    ViewBag.Title = "My Trip Log";
+}
+
+<a asp-controller="Trip" asp-action="Add">Add Trip</a>
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Destination</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Accommodations</th>
+            <th>Things to Do</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Trip trip in Model)
+        {
+        <tr>
+            <td>@trip.Destination</td>
+            <td>@trip.Start.ToString("MM/dd/yyyy")</td>
+            <td>@trip.End.ToString("MM/dd/yyyy")</td>
+            <td>@trip.Accommodations</td>
+            <td>@trip.AccommodationEmail</td>
+            <td>@trip.AccommodationPhone</td>
+            <td>@trip.ToDo1</td>
+        </tr>
+        }
+    </tbody>
+
+
+</table>

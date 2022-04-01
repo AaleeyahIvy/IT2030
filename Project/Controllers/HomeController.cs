@@ -16,7 +16,7 @@ namespace ProjectTrips.Controllers
 
         public ViewResult Index()
         {
-            var trips = Context.Trips.OrderBy(t => t.Destination).ToList();
+            List<Trip> trips = Context.Trips.OrderBy(t => t.Start).ToList();
 
             return View(trips);
         }

@@ -1,9 +1,9 @@
-﻿@model List<Trip>
+@model List<Trip>
 @{ 
-    ViewBag.Title = "My Trip Log";
+    ViewBag.Title = "Aaleeyah's Trip Log";
 }
 
-<a asp-controller="Trip" asp-action="Add">Add Trip</a>
+<a asp-controller="Trip" asp-action="AddOne">Add Trip</a>
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
@@ -11,6 +11,8 @@
             <th>Start Date</th>
             <th>End Date</th>
             <th>Accommodations</th>
+            <th>Accommodation Email</th>
+            <th>Accommodation Phone</th>
             <th>Things to Do</th>
         </tr>
     </thead>
